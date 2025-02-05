@@ -6,12 +6,11 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 11:23:52 by ikozhina          #+#    #+#             */
-/*   Updated: 2024/11/22 12:08:27 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/02/05 09:28:42 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"libft.h"
-#include<limits.h>
 
 int	ft_atoi(const char *nptr)
 {

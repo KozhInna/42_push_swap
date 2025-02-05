@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 12:52:00 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/01/31 11:04:57 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/02/05 09:08:20 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdint.h>
+# include<limits.h>
 
 typedef struct s_list
 {
