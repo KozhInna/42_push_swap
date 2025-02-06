@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:42:54 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/02/06 15:31:16 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/02/06 22:50:21 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 
 void input_to_ar(int argc, char **argv);
 void only_digits(char *s);
-void make_arr(int value, int **arr, int *capacity, int *length);
+void make_arr(int value, int **arr, size_t *capacity, size_t *length);
 void print_error(void);
 int	atoi_limits_check(const char *nptr);
 void is_empty_str(char *s);
+int is_duplicate(int *new_arr, size_t arr_length, int int_value);
 
 int main(int argc, char **argv)
 {
@@ -37,8 +38,8 @@ void input_to_ar(int argc, char **argv)
 	char **split_argv;
 	int int_value;
 	int *new_arr;
-	int arr_length;
-	int capacity;
+	size_t arr_length;
+	size_t capacity;
 
 	capacity = 5;
 	new_arr = malloc(sizeof(int) * capacity);
@@ -55,26 +56,43 @@ void input_to_ar(int argc, char **argv)
 		{
 			only_digits(split_argv[j]);
 			int_value = atoi_limits_check(split_argv[j]);
-			make_arr(int_value, &new_arr, &capacity, &arr_length);
+            if (!is_duplicate(new_arr, arr_length, int_value))
+			    make_arr(int_value, &new_arr, &capacity, &arr_length);
 			j++;
 		}
 		i++;
 	}
-	printf("ar length - %d\n", arr_length);
-	printf("ar capacity - %d\n", capacity);
+	printf("ar length - %zu\n", arr_length);
+	printf("ar capacity - %zu\n", capacity);
 
-	i = 0;
-	while (i < arr_length)
+	size_t k = 0;
+	while (k < arr_length)
 	{
-		printf("%d ", new_arr[i]);
-		i++;
+		printf("%d ", new_arr[k]);
+		k++;
 	}
 }
 
-void make_arr(int value, int **arr, int *capacity, int *length)
+int is_duplicate(int *new_arr, size_t arr_length, int int_value)
+{
+    size_t i;
+
+    i = 0;
+    if (!new_arr)
+        return (0);
+    while (i < arr_length)
+    {
+        if (new_arr[i] == int_value)
+            print_error();
+        i++;
+    }
+    return (0);
+}
+
+void make_arr(int value, int **arr, size_t *capacity, size_t *length)
 {
 	int *temp_arr;
-	int i;
+	size_t i;
 
 	temp_arr = NULL;
 	i = 0;
@@ -148,8 +166,10 @@ int	atoi_limits_check(const char *nptr)
 	while (*nptr >= '0' && *nptr <= '9')
 	{
 		res = res * 10 + (*nptr - '0');
-		if (res > INT_MAX || res < INT_MIN)
+		if (sign == 1 && res > INT_MAX)
 			print_error();
+        if (sign == -1 && -res < INT_MIN)
+		    print_error();
 		nptr++;
 	}
 	return ((int)(res * sign));
