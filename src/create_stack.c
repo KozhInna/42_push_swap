@@ -6,18 +6,18 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 13:39:53 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/02/07 13:58:40 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/02/10 15:08:17 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"push_swap.h"
+#include<stdio.h>
 
-size_t calculate_numbers(int argc, char **argv, size_t *numbers_count)
+void calculate_numbers(int argc, char **argv, size_t *numbers_count)
 {
-	size_t i;
+	int i;
 	size_t j;
 	char **split_argv;
-	int int_value;
 
 	i = 1;
 	while (i < argc)
@@ -28,13 +28,11 @@ size_t calculate_numbers(int argc, char **argv, size_t *numbers_count)
 		while(split_argv[j])
 		{
 			only_digits(split_argv[j]);
-			int_value = atoi_limits_check(split_argv[j]);
-			// duplicate_check(new_arr, arr_length, int_value);
-            // if (!duplicate_check(new_arr, arr_length, int_value))
-			    // make_arr(int_value, &new_arr, &capacity, &arr_length);
-			numbers_count++;
+			atoi_limits_check(split_argv[j]);
+			(*numbers_count)++;
 			j++;
 		}
+		free_split(split_argv);
 		i++;
 	}
 }
@@ -45,45 +43,82 @@ void input_to_ar(int argc, char **argv)
 	int j;
 	char **split_argv;
 	int int_value;
-	int *new_arr;
-	size_t arr_length;
-	size_t capacity;
+	size_t k;
 	size_t numbers_count;
+	t_list	*a_list;
 
+	k = 0;
 	numbers_count = 0;
-	capacity = 5;
-	new_arr = malloc(sizeof(int) * capacity);
-	if (!new_arr)
-		return ;
-	arr_length = 0;
-	i = 1;
-	//calculate number of numbers and check input (if error --> send error and stop)
-	// while (i < argc)
-	// {
-	// 	is_empty_str(argv[i]);
-	// 	split_argv = ft_split(argv[i], ' ');
-	// 	j = 0;
-	// 	while(split_argv[j])
-	// 	{
-	// 		only_digits(split_argv[j]);
-	// 		int_value = atoi_limits_check(split_argv[j]);
-	// 		duplicate_check(new_arr, arr_length, int_value);
-    //         // if (!duplicate_check(new_arr, arr_length, int_value))
-	// 		    // make_arr(int_value, &new_arr, &capacity, &arr_length);
-	// 		numbers_count++;
-	// 		j++;
-	// 	}
-	// 	i++;
-	// }
 	calculate_numbers(argc, argv, &numbers_count);
-	printf("number of numbers %zu\n", numbers_count);
-	printf("ar length - %zu\n", arr_length);
-	printf("ar capacity - %zu\n", capacity);
-
-	size_t k = 0;
-	while (k < arr_length)
+	intialise_struct(&a_list, numbers_count);
+	if (!a_list || !a_list->stack_a)
+		return ;
+	i = 1;
+	while (i < argc)
 	{
-		printf("%d ", new_arr[k]);
+		split_argv = ft_split(argv[i], ' ');
+		j = 0;
+		while(split_argv[j])
+		{
+			int_value = atoi_limits_check(split_argv[j]);
+			duplicate_check(a_list->stack_a, k, int_value);
+			a_list->stack_a[k++] = int_value;
+			a_list->a_end++;
+			j++;
+		}
+		free_split(split_argv);
+		i++;
+	}
+
+	printf("numbers count %zu\n", numbers_count);
+
+	k = 0;
+	while (k < numbers_count)
+	{
+		printf("%d ", a_list->stack_a[k]);
 		k++;
 	}
+	printf("\n");
+	printf("start - %zu\n end- %zu\n", a_list->a_start, a_list->a_end);
+
+	swap_a(&a_list);
+		k = 0;
+	while (k < numbers_count)
+	{
+		printf("%d ", a_list->stack_a[k]);
+		k++;
+	}
+	printf("\n");
+	printf("start - %zu\n end- %zu\n", a_list->a_start, a_list->a_end);
+	// free(new_arr);
 }
+void free_split(char **split_argv)
+{
+	size_t i;
+
+	i = 0;
+	while (split_argv[i])
+	{
+		free(split_argv[i]);
+		i++;
+	}
+	free(split_argv);
+}
+
+void	intialise_struct(t_list **list, size_t numbers_count)
+{
+	*list = malloc(sizeof(t_list));
+	if (!(*list))
+		return ;
+	(*list)->length = numbers_count;
+	(*list)->a_start = 0;
+	(*list)->a_end = 0;
+	(*list)->stack_a = malloc(sizeof(int) * numbers_count);
+
+	if (!(*list)->stack_a)
+	{
+		free((*list));
+		return ;
+	}
+}
+

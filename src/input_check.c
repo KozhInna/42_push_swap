@@ -6,26 +6,25 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:56:20 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/02/07 12:56:52 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/02/10 11:34:05 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"push_swap.h"
 
-int duplicate_check(int *new_arr, size_t arr_length, int int_value)
+void duplicate_check(int *new_arr, size_t arr_length, int int_value)
 {
     size_t i;
 
     i = 0;
     if (!new_arr)
-        return (0);
+        return ;
     while (i < arr_length)
     {
         if (new_arr[i] == int_value)
             print_error();
         i++;
-    }
-    return (0);
+	}
 }
 
 void only_digits(char *s)
