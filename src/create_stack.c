@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 13:39:53 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/02/12 15:47:35 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/02/12 21:48:44 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void input_to_ar(int argc, char **argv)
 			duplicate_check(a_list->stack_a, k, int_value);
 			a_list->stack_a[k++] = int_value;
 			a_list->a_end++;
-			printf("compiling end %d", a_list->a_end);
 			j++;
 		}
 		free_split(split_argv);
@@ -84,7 +83,7 @@ void input_to_ar(int argc, char **argv)
 	// }
 	printf("\nnot sorted\n");
 	print_circular_buffer_a(a_list, numbers_count);
-	printf("\nstart - %d\n end- %d\n", a_list->a_start, a_list->a_end);
+	printf("\nstart - %d end- %d\n", a_list->a_start, a_list->a_end);
 
 	// swap_a(&a_list);
 	rank_numbers(&a_list, numbers_count);
@@ -94,7 +93,11 @@ void input_to_ar(int argc, char **argv)
 	printf("\nrotated\n");
 	print_circular_buffer_a(a_list, numbers_count);
 	printf("\n");
-	printf("start - %d\n end- %d\n", a_list->a_start, a_list->a_end);
+	printf("start - %d end- %d\n", a_list->a_start, a_list->a_end);
+
+	printf("\n1 - %d\n", a_list->stack_a[a_list->a_start]);
+	printf("\n2 - %d\n", a_list->stack_a[a_list->a_start + 1]);
+	printf("\n3 - %d\n", a_list->stack_a[a_list->a_end]);
 	// free(new_arr);
 }
 void free_split(char **split_argv)
@@ -127,43 +130,22 @@ void	intialise_struct(t_stack **list, int numbers_count)
 	}
 }
 
-// void print_circular_buffer_a(t_stack *stack, int length)
-// {
-// 	int k = stack->a_start;
-
-// 	if (stack->a_start <= stack->a_end)
-// 	{
-// 		while (k != stack->a_end)
-// 		{
-// 			printf("%d ", stack->stack_a[k]);
-// 			k++;
-// 		}
-// 	}
-// 	else
-// 	{
-// 		while (k < length) {
-// 			printf("%d ", stack->stack_a[k]);
-// 			k++;
-// 		}
-
-// 		k = 0;
-// 		while (1)
-//         {
-//             printf("%d ", stack->stack_a[k]);
-//             if (k == stack->a_end)  // Ensure last element is printed
-//                 break;
-//             k++;
-//         }
-// 	}
-
-// }
  void print_circular_buffer_a(t_stack *stack, int length)
 {
 	int k = stack->a_start;
-	while (k != stack->a_end)
-	{
-		printf("%d ", stack->stack_a[k]);
-		k = (k + 1) % length;
+	
+	if (stack->a_start <= stack->a_end)
+	{	
+		while (k <= stack->a_end)
+			printf("%d ", stack->stack_a[k++]);
 	}
-	printf("\nthis is there %d", stack->stack_a[stack->a_end]);
+	else
+	{
+		while (k < length)
+			printf("%d ", stack->stack_a[k++]);
+		k = 0;
+		while (k <= stack->a_end)
+			printf("%d ", stack->stack_a[k++]);
+	}
+
 }

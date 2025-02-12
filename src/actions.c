@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:18:09 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/02/12 15:40:56 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/02/12 21:45:00 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	rotate_a(t_stack **list, int length)
 		return ;
 	(*list)->a_end = (end + 1) % length;
 	(*list)->a_start = (start + 1) % length;
-	write(1, "ra\n", 3);
+	// write(1, "ra\n", 3);
 
 	// if (end < length - 1)
 	// 	end++;
