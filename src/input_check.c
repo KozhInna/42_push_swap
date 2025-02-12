@@ -6,15 +6,15 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:56:20 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/02/10 11:34:05 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/02/12 10:23:47 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"push_swap.h"
 
-void duplicate_check(int *new_arr, size_t arr_length, int int_value)
+void duplicate_check(int *new_arr, int arr_length, int int_value)
 {
-    size_t i;
+    int i;
 
     i = 0;
     if (!new_arr)

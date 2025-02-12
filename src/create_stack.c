@@ -6,19 +6,21 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 13:39:53 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/02/10 15:08:17 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/02/12 15:47:35 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"push_swap.h"
 #include<stdio.h>
 
-void calculate_numbers(int argc, char **argv, size_t *numbers_count)
+void calculate_numbers(int argc, char **argv, int *numbers_count)
 {
 	int i;
-	size_t j;
+	int j;
 	char **split_argv;
 
+	if (argc < 2)
+		return ;
 	i = 1;
 	while (i < argc)
 	{
@@ -43,12 +45,13 @@ void input_to_ar(int argc, char **argv)
 	int j;
 	char **split_argv;
 	int int_value;
-	size_t k;
-	size_t numbers_count;
-	t_list	*a_list;
+	int k;
+	int numbers_count;
+	t_stack	*a_list;
 
 	k = 0;
 	numbers_count = 0;
+	a_list = NULL;
 	calculate_numbers(argc, argv, &numbers_count);
 	intialise_struct(&a_list, numbers_count);
 	if (!a_list || !a_list->stack_a)
@@ -64,37 +67,39 @@ void input_to_ar(int argc, char **argv)
 			duplicate_check(a_list->stack_a, k, int_value);
 			a_list->stack_a[k++] = int_value;
 			a_list->a_end++;
+			printf("compiling end %d", a_list->a_end);
 			j++;
 		}
 		free_split(split_argv);
 		i++;
 	}
 
-	printf("numbers count %zu\n", numbers_count);
+	// printf("numbers count %d\n", numbers_count);
 
-	k = 0;
-	while (k < numbers_count)
-	{
-		printf("%d ", a_list->stack_a[k]);
-		k++;
-	}
-	printf("\n");
-	printf("start - %zu\n end- %zu\n", a_list->a_start, a_list->a_end);
+	// k = 0;
+	// while (k < numbers_count)
+	// {
+	// 	printf("%d ", a_list->stack_a[k]);
+	// 	k++;
+	// }
+	printf("\nnot sorted\n");
+	print_circular_buffer_a(a_list, numbers_count);
+	printf("\nstart - %d\n end- %d\n", a_list->a_start, a_list->a_end);
 
-	swap_a(&a_list);
-		k = 0;
-	while (k < numbers_count)
-	{
-		printf("%d ", a_list->stack_a[k]);
-		k++;
-	}
+	// swap_a(&a_list);
+	rank_numbers(&a_list, numbers_count);
+	printf("\nranked\n");
+	print_circular_buffer_a(a_list, numbers_count);
+	rotate_a(&a_list, numbers_count);
+	printf("\nrotated\n");
+	print_circular_buffer_a(a_list, numbers_count);
 	printf("\n");
-	printf("start - %zu\n end- %zu\n", a_list->a_start, a_list->a_end);
+	printf("start - %d\n end- %d\n", a_list->a_start, a_list->a_end);
 	// free(new_arr);
 }
 void free_split(char **split_argv)
 {
-	size_t i;
+	int i;
 
 	i = 0;
 	while (split_argv[i])
@@ -105,14 +110,14 @@ void free_split(char **split_argv)
 	free(split_argv);
 }
 
-void	intialise_struct(t_list **list, size_t numbers_count)
+void	intialise_struct(t_stack **list, int numbers_count)
 {
-	*list = malloc(sizeof(t_list));
+	*list = malloc(sizeof(t_stack));
 	if (!(*list))
 		return ;
 	(*list)->length = numbers_count;
 	(*list)->a_start = 0;
-	(*list)->a_end = 0;
+	(*list)->a_end = -1;
 	(*list)->stack_a = malloc(sizeof(int) * numbers_count);
 
 	if (!(*list)->stack_a)
@@ -122,3 +127,43 @@ void	intialise_struct(t_list **list, size_t numbers_count)
 	}
 }
 
+// void print_circular_buffer_a(t_stack *stack, int length)
+// {
+// 	int k = stack->a_start;
+
+// 	if (stack->a_start <= stack->a_end)
+// 	{
+// 		while (k != stack->a_end)
+// 		{
+// 			printf("%d ", stack->stack_a[k]);
+// 			k++;
+// 		}
+// 	}
+// 	else
+// 	{
+// 		while (k < length) {
+// 			printf("%d ", stack->stack_a[k]);
+// 			k++;
+// 		}
+
+// 		k = 0;
+// 		while (1)
+//         {
+//             printf("%d ", stack->stack_a[k]);
+//             if (k == stack->a_end)  // Ensure last element is printed
+//                 break;
+//             k++;
+//         }
+// 	}
+
+// }
+ void print_circular_buffer_a(t_stack *stack, int length)
+{
+	int k = stack->a_start;
+	while (k != stack->a_end)
+	{
+		printf("%d ", stack->stack_a[k]);
+		k = (k + 1) % length;
+	}
+	printf("\nthis is there %d", stack->stack_a[stack->a_end]);
+}

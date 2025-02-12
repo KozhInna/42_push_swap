@@ -6,7 +6,7 @@
 #    By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/30 12:22:04 by ikozhina          #+#    #+#              #
-#    Updated: 2025/02/10 15:07:17 by ikozhina         ###   ########.fr        #
+#    Updated: 2025/02/12 10:18:37 by ikozhina         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror -I./libft -I./include
 
-SRCS = src/push_swap_main.c src/create_stack.c src/input_check.c src/actions.c
+SRCS = src/push_swap_main.c src/create_stack.c src/input_check.c src/actions.c \
+		src/ranking.c
 
 OBJS = $(SRCS:.c=.o)
 
