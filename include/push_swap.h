@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 12:17:34 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/02/12 14:45:17 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/02/14 14:46:06 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # define PUSH_SWAP_H
 
 # include "libft.h"
+#include<stdio.h>
 
 typedef struct s_stack
 {
@@ -26,6 +27,8 @@ typedef struct s_stack
 	int	b_end;
 	int		*stack_b;
 }	t_stack;
+
+
 
 // typedef struct s_list
 // {
@@ -40,10 +43,11 @@ void	is_empty_str(char *s);
 void	free_split(char **split_argv);
 void	duplicate_check(int *new_arr, int arr_length, int int_value);
 void	intialise_struct(t_stack **list, int numbers_count);
-void	swap_a(t_stack **list, int length);
-void	rotate_a(t_stack **list, int length);
-void	rank_numbers(t_stack **list, int length);
+void	swap_a(t_stack *list, int length);
+void	rotate_a(t_stack *list, int length);
+void	rank_numbers(t_stack *list, int length);
 void 	print_circular_buffer_a(t_stack *stack, int length);
 int		atoi_limits_check(const char *nptr);
+int		is_pivot(t_stack *stack, int length);
 
 #endif

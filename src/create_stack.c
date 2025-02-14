@@ -6,12 +6,11 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 13:39:53 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/02/12 21:48:44 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/02/14 14:59:07 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"push_swap.h"
-#include<stdio.h>
 
 void calculate_numbers(int argc, char **argv, int *numbers_count)
 {
@@ -86,18 +85,17 @@ void input_to_ar(int argc, char **argv)
 	printf("\nstart - %d end- %d\n", a_list->a_start, a_list->a_end);
 
 	// swap_a(&a_list);
-	rank_numbers(&a_list, numbers_count);
+	rank_numbers(a_list, numbers_count);
 	printf("\nranked\n");
 	print_circular_buffer_a(a_list, numbers_count);
-	rotate_a(&a_list, numbers_count);
+
+	rotate_a(a_list, numbers_count);
 	printf("\nrotated\n");
 	print_circular_buffer_a(a_list, numbers_count);
-	printf("\n");
-	printf("start - %d end- %d\n", a_list->a_start, a_list->a_end);
+	printf("pivot - %d\n", is_pivot(a_list, numbers_count));
+	// printf("\n");
+	// printf("start - %d end- %d\n", a_list->a_start, a_list->a_end);
 
-	printf("\n1 - %d\n", a_list->stack_a[a_list->a_start]);
-	printf("\n2 - %d\n", a_list->stack_a[a_list->a_start + 1]);
-	printf("\n3 - %d\n", a_list->stack_a[a_list->a_end]);
 	// free(new_arr);
 }
 void free_split(char **split_argv)
@@ -133,9 +131,9 @@ void	intialise_struct(t_stack **list, int numbers_count)
  void print_circular_buffer_a(t_stack *stack, int length)
 {
 	int k = stack->a_start;
-	
+
 	if (stack->a_start <= stack->a_end)
-	{	
+	{
 		while (k <= stack->a_end)
 			printf("%d ", stack->stack_a[k++]);
 	}
