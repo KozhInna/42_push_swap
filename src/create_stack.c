@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 13:39:53 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/02/14 14:59:07 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/02/24 22:21:58 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,24 @@ void calculate_numbers(int argc, char **argv, int *numbers_count)
 	}
 }
 
-void input_to_ar(int argc, char **argv)
+t_stack *input_to_ar(int argc, char **argv)
 {
 	int i;
 	int j;
 	char **split_argv;
 	int int_value;
-	int k;
 	int numbers_count;
-	t_stack	*a_list;
+	t_stack	*stacks;
 
-	k = 0;
 	numbers_count = 0;
-	a_list = NULL;
+	stacks = NULL;
 	calculate_numbers(argc, argv, &numbers_count);
-	intialise_struct(&a_list, numbers_count);
-	if (!a_list || !a_list->stack_a)
-		return ;
+	intialise_struct(&stacks, numbers_count);
+	if (!stacks || !stacks->stack_a || !stacks->stack_b)
+	{
+		free(stacks);
+		return NULL;
+	}
 	i = 1;
 	while (i < argc)
 	{
@@ -63,40 +64,33 @@ void input_to_ar(int argc, char **argv)
 		while(split_argv[j])
 		{
 			int_value = atoi_limits_check(split_argv[j]);
-			duplicate_check(a_list->stack_a, k, int_value);
-			a_list->stack_a[k++] = int_value;
-			a_list->a_end++;
+			duplicate_check(stacks->stack_a, stacks->a_end, int_value);
+			stacks->stack_a[stacks->a_end++] = int_value;
+			stacks->length_a++;
 			j++;
 		}
 		free_split(split_argv);
 		i++;
 	}
 
-	// printf("numbers count %d\n", numbers_count);
+	// printf("\nnot sorted\n");
+	// print_circular_buffer_a(stacks, numbers_count);
+	// printf("\nstart - %d end- %d\n", stacks->a_start, stacks->a_end);
 
-	// k = 0;
-	// while (k < numbers_count)
-	// {
-	// 	printf("%d ", a_list->stack_a[k]);
-	// 	k++;
-	// }
-	printf("\nnot sorted\n");
-	print_circular_buffer_a(a_list, numbers_count);
-	printf("\nstart - %d end- %d\n", a_list->a_start, a_list->a_end);
+	// // swap_a(&stacks);
+	// rank_numbers(stacks, numbers_count);
+	// printf("\nranked\n");
+	// print_circular_buffer_a(stacks, numbers_count);
 
-	// swap_a(&a_list);
-	rank_numbers(a_list, numbers_count);
-	printf("\nranked\n");
-	print_circular_buffer_a(a_list, numbers_count);
+	// rotate_a(stacks, numbers_count);
+	// printf("\nrotated\n");
+	// print_circular_buffer_a(stacks, numbers_count);
+	// // printf("\n");
+	// // printf("start - %d end- %d\n", stacks->a_start, stacks->a_end);
 
-	rotate_a(a_list, numbers_count);
-	printf("\nrotated\n");
-	print_circular_buffer_a(a_list, numbers_count);
-	printf("pivot - %d\n", is_pivot(a_list, numbers_count));
-	// printf("\n");
-	// printf("start - %d end- %d\n", a_list->a_start, a_list->a_end);
-
-	// free(new_arr);
+	// // free(new_arr);
+	stacks->a_end--;
+	return(stacks);
 }
 void free_split(char **split_argv)
 {
@@ -116,34 +110,26 @@ void	intialise_struct(t_stack **list, int numbers_count)
 	*list = malloc(sizeof(t_stack));
 	if (!(*list))
 		return ;
-	(*list)->length = numbers_count;
+	(*list)->capacity = numbers_count;
+	(*list)->length_a = 0;
 	(*list)->a_start = 0;
-	(*list)->a_end = -1;
+	(*list)->a_end = 0;
+	(*list)->length_b = 0;
+	(*list)->b_start = 0;
+	(*list)->b_end = 0;
 	(*list)->stack_a = malloc(sizeof(int) * numbers_count);
-
 	if (!(*list)->stack_a)
 	{
 		free((*list));
+		*list = NULL;
 		return ;
 	}
-}
-
- void print_circular_buffer_a(t_stack *stack, int length)
-{
-	int k = stack->a_start;
-
-	if (stack->a_start <= stack->a_end)
+	(*list)->stack_b = malloc(sizeof(int) * numbers_count);
+	if (!(*list)->stack_b)
 	{
-		while (k <= stack->a_end)
-			printf("%d ", stack->stack_a[k++]);
+		free((*list)->stack_a);
+		free((*list));
+		*list = NULL;
+		return ;
 	}
-	else
-	{
-		while (k < length)
-			printf("%d ", stack->stack_a[k++]);
-		k = 0;
-		while (k <= stack->a_end)
-			printf("%d ", stack->stack_a[k++]);
-	}
-
 }
