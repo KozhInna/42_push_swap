@@ -6,12 +6,11 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 10:07:13 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/02/14 10:56:44 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/02/24 10:42:09 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"push_swap.h"
-#include<stdio.h>
 
 void	rank_numbers(t_stack *list, int length)
 {
