@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 10:44:28 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/02/25 21:52:06 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/02/25 22:25:39 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,20 @@
 void sorting(t_stack *list, int length)
 {
     initial_split(list, length);
+    radix_sort(list, list->capacity);
+    final_merge(list, list->capacity);
+    // printf("--sorted--\n");
+    // printf("lenght_b - %d start_b - %d end_b - %d\n", list->length_b, list->b_start, list->b_end);
+    // printf("A - ");
+    // print_circular_buffer_a(list, list->capacity);
+    // printf("B - ");
+    // print_circular_buffer_b(list, list->capacity);
+ 
+    // printf("\nsorted\n");
+    // printf("\n------B_\n");
+    // print_circular_buffer_b(list, list->capacity);
+    // printf("--------A_\n");
+    // print_circular_buffer_a(list, list->capacity);
 }
 void initial_split(t_stack *list, int length_a)
 {
@@ -47,27 +61,16 @@ void initial_split(t_stack *list, int length_a)
     // print_circular_buffer_a(list, list->capacity);
     // printf("B - ");
     // print_circular_buffer_b(list, list->capacity);
-    radix_sort(list, list->capacity);
-    final_merge(list, list->capacity);
-    // printf("--sorted--\n");
-    // printf("lenght_b - %d start_b - %d end_b - %d\n", list->length_b, list->b_start, list->b_end);
-    // printf("A - ");
-    // print_circular_buffer_a(list, list->capacity);
-    // printf("B - ");
-    // print_circular_buffer_b(list, list->capacity);
- 
-    // printf("\nsorted\n");
-    // printf("\n------B_\n");
-    // print_circular_buffer_b(list, list->capacity);
-    // printf("--------A_\n");
-    // print_circular_buffer_a(list, list->capacity);
 }
 void    radix_sort(t_stack *list, int capacity)
 {
-    int i = 1;
+    int i; 
     int len_b;
     int len_a;
-    while (i < 7)
+    int max_bits;
+    i = 1;
+    max_bits = count_bits(list->max);
+    while (i < max_bits)
     {
         len_a = list->length_a;
         len_b = list->length_b;
@@ -119,4 +122,16 @@ void    final_merge(t_stack *list, int capacity)
         rotate_a(list, capacity);
         i++;
     }
+}
+int count_bits(int max)
+{
+    int count;
+
+    count = 0;
+    while (max > 0)
+    {
+        count++;
+        max = max >> 1;
+    }
+    return count;
 }

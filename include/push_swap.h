@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 12:17:34 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/02/25 22:06:16 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/02/25 22:20:28 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 typedef struct s_stack
 {
 	int capacity;
+	int	max;
 	int	length_a;
 	int	a_start;
 	int	a_end;
@@ -49,6 +50,8 @@ int		atoi_limits_check(const char *nptr);
 void	sorting(t_stack *list, int length);
 void	initial_split(t_stack *list, int length);
 void    final_merge(t_stack *list, int capacity);
+void	find_max(t_stack *list);
+int		count_bits(int max);
 
 void 	print_circular_buffer_a(t_stack *stack, int length);
 void 	print_circular_buffer_b(t_stack *stack, int length);
