@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 10:44:28 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/02/24 22:23:00 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/02/25 09:03:24 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,7 @@ void initial_split(t_stack *list, int length_a)
     {   
         if(list->stack_a[list->a_start] & 1)
         {
-            list->b_start = (list->b_start - 1 + list->capacity) % list->capacity;
-            list->stack_b[list->b_start] = list->stack_a[list->a_start];
-            list->a_start = (list->a_start + 1) % list->capacity;
-            list->length_a--;
-            list->length_b++;
+            push_b(list, list->capacity);
         }
         else
         {

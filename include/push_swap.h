@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 12:17:34 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/02/24 21:26:55 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/02/25 09:02:17 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,12 @@ void	free_split(char **split_argv);
 void	duplicate_check(int *new_arr, int arr_length, int int_value);
 void	intialise_struct(t_stack **list, int numbers_count);
 t_stack *input_to_ar(int argc, char **argv);
-void	swap_a(t_stack *list, int length);
+// void	swap_a(t_stack *list, int length);
 void	rotate_a(t_stack *list, int length);
+void	rotate_b(t_stack *list, int capacity);
+void	push_b(t_stack *list, int capacity);
+void	push_a(t_stack *list, int capacity);
+void	rotate_both(t_stack *list, int capacity);
 void	rank_numbers(t_stack *list, int length);
 int		atoi_limits_check(const char *nptr);
 void	sorting(t_stack *list, int length);
