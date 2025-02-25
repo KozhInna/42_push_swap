@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 12:17:34 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/02/25 09:02:17 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/02/25 22:06:16 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,12 @@ void	rotate_b(t_stack *list, int capacity);
 void	push_b(t_stack *list, int capacity);
 void	push_a(t_stack *list, int capacity);
 void	rotate_both(t_stack *list, int capacity);
+void    radix_sort(t_stack *list, int capacity);
 void	rank_numbers(t_stack *list, int length);
 int		atoi_limits_check(const char *nptr);
 void	sorting(t_stack *list, int length);
 void	initial_split(t_stack *list, int length);
+void    final_merge(t_stack *list, int capacity);
 
 void 	print_circular_buffer_a(t_stack *stack, int length);
 void 	print_circular_buffer_b(t_stack *stack, int length);

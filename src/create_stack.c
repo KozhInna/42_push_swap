@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 13:39:53 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/02/24 22:21:58 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/02/25 21:52:33 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,21 +65,21 @@ t_stack *input_to_ar(int argc, char **argv)
 		{
 			int_value = atoi_limits_check(split_argv[j]);
 			duplicate_check(stacks->stack_a, stacks->a_end, int_value);
-			stacks->stack_a[stacks->a_end++] = int_value;
+			stacks->stack_a[stacks->a_end] = int_value;
 			stacks->length_a++;
+			if (stacks->length_a != stacks->capacity)
+				stacks->a_end++;
 			j++;
 		}
 		free_split(split_argv);
 		i++;
 	}
-
 	// printf("\nnot sorted\n");
 	// print_circular_buffer_a(stacks, numbers_count);
-	// printf("\nstart - %d end- %d\n", stacks->a_start, stacks->a_end);
-
 	// // swap_a(&stacks);
-	// rank_numbers(stacks, numbers_count);
+	rank_numbers(stacks, numbers_count);
 	// printf("\nranked\n");
+	// printf("count num - %d\n", numbers_count);
 	// print_circular_buffer_a(stacks, numbers_count);
 
 	// rotate_a(stacks, numbers_count);
@@ -89,7 +89,7 @@ t_stack *input_to_ar(int argc, char **argv)
 	// // printf("start - %d end- %d\n", stacks->a_start, stacks->a_end);
 
 	// // free(new_arr);
-	stacks->a_end--;
+	
 	return(stacks);
 }
 void free_split(char **split_argv)
