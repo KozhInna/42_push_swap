@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 13:39:53 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/02/25 21:52:33 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/02/26 10:20:42 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ t_stack *input_to_ar(int argc, char **argv)
 	// // printf("start - %d end- %d\n", stacks->a_start, stacks->a_end);
 
 	// // free(new_arr);
-	
+
 	return(stacks);
 }
 void free_split(char **split_argv)
@@ -111,6 +111,7 @@ void	intialise_struct(t_stack **list, int numbers_count)
 	if (!(*list))
 		return ;
 	(*list)->capacity = numbers_count;
+	(*list)->max = 0;
 	(*list)->length_a = 0;
 	(*list)->a_start = 0;
 	(*list)->a_end = 0;

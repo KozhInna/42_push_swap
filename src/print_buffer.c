@@ -2,10 +2,12 @@
 
 void print_circular_buffer_a(t_stack *stack, int capacity)
 {
-    if (stack->length_a == 0)
-        return ;
-	int k = stack->a_start;
-    printf("start_a - %d end_a - %d\n", stack->a_start, stack->a_end);
+	int	k;
+
+	if (stack->length_a == 0)
+		return ;
+	k = stack->a_start;
+	// printf("start_a - %d end_a - %d\n", stack->a_start, stack->a_end);
 
 	if (stack->a_start <= stack->a_end)
 	{
@@ -20,15 +22,17 @@ void print_circular_buffer_a(t_stack *stack, int capacity)
 		while (k <= stack->a_end)
 			printf("%d ", stack->stack_a[k++]);
 	}
-    printf("\n");
+	printf("\n");
 }
 
 void print_circular_buffer_b(t_stack *stack, int capacity)
 {
-    if (stack->length_b == 0)
-        return ;
-	int k = stack->b_start;
-    // printf("start_b - %d end_b - %d\n", k, stack->b_end);
+	int	k;
+
+	if (stack->length_b == 0)
+		return ;
+	k = stack->b_start;
+	// printf("start_b - %d end_b - %d\n", k, stack->b_end);
 
 	if (stack->b_start <= stack->b_end)
 	{
@@ -43,5 +47,5 @@ void print_circular_buffer_b(t_stack *stack, int capacity)
 		while (k <= stack->b_end)
 			printf("%d ", stack->stack_b[k++]);
 	}
-    printf("\n");
+	printf("\n");
 }

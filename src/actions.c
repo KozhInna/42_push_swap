@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:18:09 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/02/25 21:53:17 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/02/26 15:24:16 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,17 @@ void	rotate_a(t_stack *list, int capacity)
 	// printf("len - %d, capacity - %d", list->length_a, capacity);
 	if (list->a_start == list->a_end)
 		return ;
-	// if (list->length_a == capacity)
-	// {
-	// 	list->a_end = (list->a_end + 1) % capacity;
-	// 	list->a_start = (list->a_start + 1) % capacity;
-	// }
-	list->a_end = (list->a_end + 1) % capacity;
-	list->stack_a[list->a_end] = list->stack_a[list->a_start];
-	list->a_start = (list->a_start + 1) % capacity;
+	if (list->length_a == capacity)
+	{
+		list->a_end = (list->a_end + 1) % capacity;
+		list->a_start = (list->a_start + 1) % capacity;
+	}
+	else
+	{
+		list->a_end = (list->a_end + 1) % capacity;
+		list->stack_a[list->a_end] = list->stack_a[list->a_start];
+		list->a_start = (list->a_start + 1) % capacity;
+	}
 	write(1, "ra\n", 3);
 }
 void	rotate_b(t_stack *list, int capacity)
@@ -71,7 +74,18 @@ void	push_a(t_stack *list, int capacity)
 }
 void	rotate_both(t_stack *list, int capacity)
 {
-	rotate_a(list, capacity);
-	rotate_b(list, capacity);
-	// write(1, "rr\n", 3);
+	// rotate_a(list, capacity);
+	// if (list->a_start == list->a_end)
+	// 	return ;
+	list->a_end = (list->a_end + 1) % capacity;
+	list->stack_a[list->a_end] = list->stack_a[list->a_start];
+	list->a_start = (list->a_start + 1) % capacity;
+
+	// rotate_b(list, capacity);
+	// if (list->b_start == list->b_end)
+	// 	return ;
+	list->b_end = (list->b_end + 1) % capacity;
+	list->stack_b[list->b_end] = list->stack_b[list->b_start];
+	list->b_start = (list->b_start + 1) % capacity;
+	write(1, "rr\n", 3);
 }
