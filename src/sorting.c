@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 10:44:28 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/02/26 15:23:53 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/02/27 13:35:01 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,16 +101,23 @@ void    radix_sort(t_stack *list, int capacity)
 		}
 		while(len_b > 0)
 		{
-			if ((list->stack_b[list->b_start] >> i) & 1)
+			if (!((list->stack_b[list->b_start] >> i) & 1))
 			{
-				rotate_b(list, capacity);
+                push_a(list, capacity);
+                len_b--;
+                if (((list->stack_b[list->b_start] >> i) & 1) && len_b > 1)
+                {
+                    rotate_both(list, capacity);
+                    len_b--;
+                }
+                else
+                    rotate_a(list, capacity);
 			}
 			else
 			{
-				push_a(list, capacity);
-				rotate_a(list, capacity);
+                rotate_b(list, capacity);
+                len_b--;
 			}
-			len_b--;
 		}
 		// printf("\n--%d--\n", i);
 		// printf("A - ");
@@ -121,22 +128,6 @@ void    radix_sort(t_stack *list, int capacity)
 	}
 }
 
-	// if (!((list->stack_b[list->b_start] >> i) & 1))
-	// {
-	// 	push_a(list, capacity);
-	// 	if (!((list->stack_b[list->b_start] >> i) & 1))
-	// 	{
-	// 		rotate_both(list, capacity);
-	// 		len_b--;
-	// 	}
-	// 	else
-	// 		rotate_a(list, capacity);
-
-	// }
-	// else
-	// {
-	// 	rotate_b(list, capacity);
-	// }
 void    final_merge(t_stack *list, int capacity)
 {
 	int i = 0;
