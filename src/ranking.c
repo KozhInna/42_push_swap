@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 10:07:13 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/02/25 22:15:14 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/02/28 10:48:21 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,19 @@ void find_max(t_stack *list)
 		i++;
 	}
 	list->max = max;
+}
+int	find_min(t_stack *list)
+{
+	int	min;
+	int	i;
+
+	i = 0;
+	min = list->stack_a[i];
+	while (i < list->length_a)
+	{
+		if (min > list->stack_a[i])
+			min = list->stack_a[i];
+		i++;
+	}
+	return (min);
 }

@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 10:44:28 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/02/27 13:35:01 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/02/28 09:56:04 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,18 @@
 
 void sorting(t_stack *list, int length)
 {
-	initial_split(list, length);
-	radix_sort(list, list->capacity);
-	final_merge(list, list->capacity);
+	if (length <= 5)
+	{
+		sort_three(list, list->capacity);
+		printf("\nsorted\n");
+		print_circular_buffer_a(list, list->capacity);
+	}
+	else
+	{
+		initial_split(list, length);
+		radix_sort(list, list->capacity);
+		final_merge(list, list->capacity);
+	}
 	// printf("--sorted--\n");
 	// printf("lenght_b - %d start_b - %d end_b - %d\n", list->length_b, list->b_start, list->b_end);
 	// printf("A - ");

@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 12:17:34 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/02/25 22:20:28 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/02/28 10:48:02 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,15 @@ void	free_split(char **split_argv);
 void	duplicate_check(int *new_arr, int arr_length, int int_value);
 void	intialise_struct(t_stack **list, int numbers_count);
 t_stack *input_to_ar(int argc, char **argv);
-// void	swap_a(t_stack *list, int length);
+
+void	swap_a(t_stack *list, int length);
 void	rotate_a(t_stack *list, int length);
+void	rrotate_a(t_stack *list, int capacity);
 void	rotate_b(t_stack *list, int capacity);
 void	push_b(t_stack *list, int capacity);
 void	push_a(t_stack *list, int capacity);
 void	rotate_both(t_stack *list, int capacity);
+
 void    radix_sort(t_stack *list, int capacity);
 void	rank_numbers(t_stack *list, int length);
 int		atoi_limits_check(const char *nptr);
@@ -51,7 +54,9 @@ void	sorting(t_stack *list, int length);
 void	initial_split(t_stack *list, int length);
 void    final_merge(t_stack *list, int capacity);
 void	find_max(t_stack *list);
+int		find_min(t_stack *list);
 int		count_bits(int max);
+void    sort_three(t_stack *list, int capacity);
 
 void 	print_circular_buffer_a(t_stack *stack, int length);
 void 	print_circular_buffer_b(t_stack *stack, int length);
