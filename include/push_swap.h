@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 12:17:34 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/02/28 10:48:02 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/02/28 23:44:53 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	intialise_struct(t_stack **list, int numbers_count);
 t_stack *input_to_ar(int argc, char **argv);
 
 void	swap_a(t_stack *list, int length);
+void	swap_b(t_stack *list, int capacity);
 void	rotate_a(t_stack *list, int length);
 void	rrotate_a(t_stack *list, int capacity);
 void	rotate_b(t_stack *list, int capacity);
@@ -53,10 +54,13 @@ int		atoi_limits_check(const char *nptr);
 void	sorting(t_stack *list, int length);
 void	initial_split(t_stack *list, int length);
 void    final_merge(t_stack *list, int capacity);
-void	find_max(t_stack *list);
-int		find_min(t_stack *list);
+int		find_max_a(t_stack *list, int capacity);
+int		find_min_a(t_stack *list, int capacity);
 int		count_bits(int max);
 void    sort_three(t_stack *list, int capacity);
+void    sort_five_or_less(t_stack *list, int capacity);
+void    sort_five(t_stack *list, int capacity);
+int 	is_sorted(t_stack *list, int capacity);
 
 void 	print_circular_buffer_a(t_stack *stack, int length);
 void 	print_circular_buffer_b(t_stack *stack, int length);

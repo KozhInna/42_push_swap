@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 10:07:13 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/02/28 10:48:21 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/02/28 15:44:53 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,34 +36,41 @@ void	rank_numbers(t_stack *list, int length)
 	}
 	free(list->stack_a);
 	list->stack_a = ranked_arr;
-	find_max(list);
+	find_max_a(list, list->capacity);
 }
-void find_max(t_stack *list)
+int find_max_a(t_stack *list, int capacity)
 {
 	int	max;
 	int	i;
+	int start;
 
 	i = 0;
-	max = list->stack_a[i];
-	while (i < list->length_a)
+	start = list->a_start;
+	max = list->stack_a[start];
+	while (i < list->length_a - 1)
 	{
-		if (max < list->stack_a[i])
-			max = list->stack_a[i];
+		start = (start + 1) % capacity;
+		if (max < list->stack_a[start])
+			max = list->stack_a[start];
 		i++;
 	}
 	list->max = max;
+	return (max);
 }
-int	find_min(t_stack *list)
+int	find_min_a(t_stack *list, int capacity)
 {
 	int	min;
 	int	i;
+	int start;
 
 	i = 0;
-	min = list->stack_a[i];
-	while (i < list->length_a)
+	start = list->a_start;
+	min = list->stack_a[start];
+	while (i < list->length_a - 1)
 	{
-		if (min > list->stack_a[i])
-			min = list->stack_a[i];
+		start = (start + 1) % capacity;
+		if (min > list->stack_a[start])
+			min = list->stack_a[start];
 		i++;
 	}
 	return (min);

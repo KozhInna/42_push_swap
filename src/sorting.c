@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 10:44:28 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/02/28 09:56:04 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/03/01 09:03:50 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void sorting(t_stack *list, int length)
 {
 	if (length <= 5)
 	{
-		sort_three(list, list->capacity);
-		printf("\nsorted\n");
-		print_circular_buffer_a(list, list->capacity);
+		sort_five_or_less(list, list->capacity);
+		// printf("\nsorted\n");
+		// print_circular_buffer_a(list, list->capacity);
 	}
 	else
 	{
@@ -61,17 +61,16 @@ void initial_split(t_stack *list, int length_a)
 		}
 		currect_index++;
 	}
-	list->b_end = list->b_start + list->length_b - 1;
 	// printf("\n_B_\n");
 	// printf("lenght_a - %d /lenght_b - %d\n", list->length_a, list->length_b);
 	// print_circular_buffer_b(list, list->capacity);
 	// printf("_A_\n");
 	// print_circular_buffer_a(list, list->capacity);
-	// printf("--0--\n");
-	// printf("A - ");
-	// print_circular_buffer_a(list, list->capacity);
-	// printf("B - ");
-	// print_circular_buffer_b(list, list->capacity);
+	printf("--0--\n");
+	printf("A - ");
+	print_circular_buffer_a(list, list->capacity);
+	printf("B - ");
+	print_circular_buffer_b(list, list->capacity);
 }
 void    radix_sort(t_stack *list, int capacity)
 {
