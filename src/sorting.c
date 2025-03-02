@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 10:44:28 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/03/01 09:03:50 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/03/03 00:13:05 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@ void sorting(t_stack *list, int length)
 	if (length <= 5)
 	{
 		sort_five_or_less(list, list->capacity);
+		// printf("\nsorted\n");
+		// print_circular_buffer_a(list, list->capacity);
+	}
+	else if (length > 5 && length <= 100)
+	{
+		sort_hundred(list, list->capacity);
 		// printf("\nsorted\n");
 		// print_circular_buffer_a(list, list->capacity);
 	}

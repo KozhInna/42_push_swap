@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 10:07:13 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/02/28 15:44:53 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/03/02 23:31:11 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,22 @@ int	find_min_a(t_stack *list, int capacity)
 		i++;
 	}
 	return (min);
+}
+int find_max_b(t_stack *list, int capacity)
+{
+	int	max;
+	int	i;
+	int start;
+
+	i = 0;
+	start = list->b_start;
+	max = list->stack_b[start];
+	while (i < list->length_b - 1)
+	{
+		start = (start + 1) % capacity;
+		if (max < list->stack_b[start])
+			max = list->stack_b[start];
+		i++;
+	}
+	return (max);
 }

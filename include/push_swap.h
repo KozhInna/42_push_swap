@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 12:17:34 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/02/28 23:44:53 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/03/02 23:39:23 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,9 @@ void    sort_three(t_stack *list, int capacity);
 void    sort_five_or_less(t_stack *list, int capacity);
 void    sort_five(t_stack *list, int capacity);
 int 	is_sorted(t_stack *list, int capacity);
+void    sort_hundred(t_stack *list, int capacity);
+int find_max_b(t_stack *list, int capacity);
+void	rrotate_b(t_stack *list, int capacity);
 
 void 	print_circular_buffer_a(t_stack *stack, int length);
 void 	print_circular_buffer_b(t_stack *stack, int length);

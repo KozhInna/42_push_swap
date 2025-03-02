@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:18:09 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/03/01 09:05:53 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/03/03 00:13:39 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	swap_b(t_stack *list, int capacity)
 
 void	rotate_a(t_stack *list, int capacity)
 {
-	// printf("len - %d, capacity - %d", list->length_a, capacity);
 	if (list->a_start == list->a_end)
 		return ;
 	if (list->length_a == capacity)
@@ -55,7 +54,6 @@ void	rotate_a(t_stack *list, int capacity)
 }
 void	rrotate_a(t_stack *list, int capacity)
 {
-	// printf("len - %d, capacity - %d", list->length_a, capacity);
 	if (list->a_start == list->a_end)
 		return ;
 	if (list->length_a == capacity)
@@ -70,6 +68,23 @@ void	rrotate_a(t_stack *list, int capacity)
 		list->a_end = (list->a_end - 1 + capacity) % capacity;
 	}
 	write(1, "rra\n", 4);
+}
+void	rrotate_b(t_stack *list, int capacity)
+{
+	if (list->b_start == list->b_end)
+		return ;
+	if (list->length_b == capacity)
+	{
+		list->b_end = (list->b_end - 1 + capacity) % capacity;
+		list->b_start = (list->b_start - 1 + capacity) % capacity;
+	}
+	else
+	{
+		list->b_start = (list->b_start - 1 + capacity) % capacity;
+		list->stack_b[list->b_start] = list->stack_b[list->b_end];
+		list->b_end = (list->b_end - 1 + capacity) % capacity;
+	}
+	write(1, "rrb\n", 4);
 }
 void	rotate_b(t_stack *list, int capacity)
 {
