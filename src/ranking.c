@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 10:07:13 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/03/02 23:31:11 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/03/03 15:01:38 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void	rank_numbers(t_stack *list, int length)
 {
 	int	value;
 	int	count;
-	int i;
-	int j;
-	int *ranked_arr;
+	int	i;
+	int	j;
+	int	*ranked_arr;
 
 	i = 0;
 	ranked_arr = malloc(sizeof(int) * length);
@@ -36,13 +36,12 @@ void	rank_numbers(t_stack *list, int length)
 	}
 	free(list->stack_a);
 	list->stack_a = ranked_arr;
-	find_max_a(list, list->capacity);
 }
-int find_max_a(t_stack *list, int capacity)
+int	find_max_a(t_stack *list, int capacity)
 {
 	int	max;
 	int	i;
-	int start;
+	int	start;
 
 	i = 0;
 	start = list->a_start;
@@ -54,7 +53,6 @@ int find_max_a(t_stack *list, int capacity)
 			max = list->stack_a[start];
 		i++;
 	}
-	list->max = max;
 	return (max);
 }
 int	find_min_a(t_stack *list, int capacity)

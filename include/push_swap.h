@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 12:17:34 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/03/02 23:39:23 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/03/03 15:00:19 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 typedef struct s_stack
 {
 	int capacity;
-	int	max;
 	int	length_a;
 	int	a_start;
 	int	a_end;

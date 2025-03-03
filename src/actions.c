@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:18:09 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/03/03 00:13:39 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/03/03 15:08:44 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,21 +114,18 @@ void	push_a(t_stack *list, int capacity)
 	list->length_b--;
 	if (list->length_b != 0)
 		list->b_start = (list->b_start + 1) % capacity;
-
 	write(1, "pa\n", 3);
 }
 void	rotate_both(t_stack *list, int capacity)
 {
-	// rotate_a(list, capacity);
-	// if (list->a_start == list->a_end)
-	// 	return ;
+	if (list->a_start == list->a_end)
+		return ;
 	list->a_end = (list->a_end + 1) % capacity;
 	list->stack_a[list->a_end] = list->stack_a[list->a_start];
 	list->a_start = (list->a_start + 1) % capacity;
 
-	// rotate_b(list, capacity);
-	// if (list->b_start == list->b_end)
-	// 	return ;
+	if (list->b_start == list->b_end)
+		return ;
 	list->b_end = (list->b_end + 1) % capacity;
 	list->stack_b[list->b_end] = list->stack_b[list->b_start];
 	list->b_start = (list->b_start + 1) % capacity;

@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 13:39:53 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/02/26 10:20:42 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/03/03 15:00:06 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ void	intialise_struct(t_stack **list, int numbers_count)
 	if (!(*list))
 		return ;
 	(*list)->capacity = numbers_count;
-	(*list)->max = 0;
 	(*list)->length_a = 0;
 	(*list)->a_start = 0;
 	(*list)->a_end = 0;
