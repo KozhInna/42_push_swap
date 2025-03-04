@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:56:20 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/02/12 10:23:47 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/03/04 13:30:17 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void duplicate_check(int *new_arr, int arr_length, int int_value)
     while (i < arr_length)
     {
         if (new_arr[i] == int_value)
-            print_error();
+			ft_putstr_fd("Error\n", 2);
         i++;
 	}
 }
@@ -35,25 +35,25 @@ void only_digits(char *s)
 	if (s[i] == '-' || s[i] == '+')
 		i++;
 	if (!ft_isdigit(s[i]))
-		print_error();
+		ft_putstr_fd("Error\n", 2);
 	while (s[i])
 	{
 		if (!ft_isdigit(s[i]))
-			print_error();
+			ft_putstr_fd("Error\n", 2);
 		i++;
 	}
 }
 void is_empty_str(char *s)
 {
 	if (!s)
-		print_error();
+		ft_putstr_fd("Error\n", 2);
 	while(*s)
 	{
 		if (*s != ' ')
 			return ;
 		s++;
 	}
-	print_error();
+	ft_putstr_fd("Error\n", 2);
 }
 
 int	atoi_limits_check(const char *nptr)
@@ -76,16 +76,28 @@ int	atoi_limits_check(const char *nptr)
 	{
 		res = res * 10 + (*nptr - '0');
 		if (sign == 1 && res > INT_MAX)
-			print_error();
+			ft_putstr_fd("Error\n", 2);
         if (sign == -1 && -res < INT_MIN)
-		    print_error();
+			ft_putstr_fd("Error\n", 2);
 		nptr++;
 	}
 	return ((int)(res * sign));
 }
-
-void print_error(void)
+int	is_sorted(t_stack *list, int capacity)
 {
-	write(2, "Error\n", 6);
-	exit (1);
+	int	i;
+	int	index;
+	int	next_index;
+
+	i = 0;
+	index = list->a_start;
+	while (i < list->length_a - 1)
+	{
+		next_index = (index + 1) % capacity;
+		if (list->stack_a[index] > list->stack_a[next_index])
+			return (0);
+		index = next_index;
+		i++;
+	}
+	return (1);
 }

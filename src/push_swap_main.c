@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:42:54 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/03/03 14:34:28 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/03/04 13:29:53 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,20 @@ int main(int argc, char **argv)
 
 	stacks = input_to_ar(argc, argv);
 	sorting(stacks, stacks->capacity);
+	free_struct(stacks);
 
 	return(0);
 }
 
-
-
+void	free_struct(t_stack *list)
+{
+	if (!list)
+		return ;
+	
+	free(list->stack_a);
+	free(list->stack_b);
+	free(list);
+}
 
 
 

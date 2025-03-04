@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 09:19:53 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/03/03 14:58:03 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/03/04 13:27:25 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	sort_five_or_less(t_stack *list, int capacity)
 {
-	if (list->length_a == 3)
+	if (list->length_a <= 3)
 		sort_three(list, capacity);
 	else
 		sort_five(list, capacity);
@@ -60,7 +60,6 @@ void	sort_three(t_stack *list, int capacity)
 {
 	int min;
 	int max;
-
 	if (is_sorted(list, capacity))
 		return ;
 	min = find_min_a(list, capacity);
@@ -89,24 +88,7 @@ void	sort_three(t_stack *list, int capacity)
 	}
 }
 
-int	is_sorted(t_stack *list, int capacity)
-{
-	int	i;
-	int	index;
-	int	next_index;
 
-	i = 0;
-	index = list->a_start;
-	while (i < list->length_a - 1)
-	{
-		next_index = (index + 1) % capacity;
-		if (list->stack_a[index] > list->stack_a[next_index])
-			return (0);
-		index = next_index;
-		i++;
-	}
-	return (1);
-}
 void	sort_hundred(t_stack *list, int capacity)
 {
 	int	point;

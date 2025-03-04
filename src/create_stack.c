@@ -6,11 +6,30 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 13:39:53 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/03/03 15:00:06 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/03/04 13:29:36 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"push_swap.h"
+
+t_stack *input_to_ar(int argc, char **argv)
+{
+	int numbers_count;
+	t_stack	*stacks;
+
+	numbers_count = 0;
+	stacks = NULL;
+	calculate_numbers(argc, argv, &numbers_count);
+	intialise_struct(&stacks, numbers_count);
+	if (!stacks || !stacks->stack_a || !stacks->stack_b)
+	{
+		free_struct(stacks);
+		return NULL;
+	}
+	fill_stack_a(argc, argv, stacks);
+	rank_numbers(stacks, numbers_count);
+	return(stacks);
+}
 
 void calculate_numbers(int argc, char **argv, int *numbers_count)
 {
@@ -38,24 +57,13 @@ void calculate_numbers(int argc, char **argv, int *numbers_count)
 	}
 }
 
-t_stack *input_to_ar(int argc, char **argv)
+void	fill_stack_a(int argc, char **argv, t_stack *stacks)
 {
 	int i;
 	int j;
-	char **split_argv;
 	int int_value;
-	int numbers_count;
-	t_stack	*stacks;
-
-	numbers_count = 0;
-	stacks = NULL;
-	calculate_numbers(argc, argv, &numbers_count);
-	intialise_struct(&stacks, numbers_count);
-	if (!stacks || !stacks->stack_a || !stacks->stack_b)
-	{
-		free(stacks);
-		return NULL;
-	}
+	char **split_argv;
+	
 	i = 1;
 	while (i < argc)
 	{
@@ -74,24 +82,8 @@ t_stack *input_to_ar(int argc, char **argv)
 		free_split(split_argv);
 		i++;
 	}
-	// printf("\nnot sorted\n");
-	// print_circular_buffer_a(stacks, numbers_count);
-	// // swap_a(&stacks);
-	rank_numbers(stacks, numbers_count);
-	// printf("\nranked\n");
-	// printf("count num - %d\n", numbers_count);
-	// print_circular_buffer_a(stacks, numbers_count);
-
-	// rotate_a(stacks, numbers_count);
-	// printf("\nrotated\n");
-	// print_circular_buffer_a(stacks, numbers_count);
-	// // printf("\n");
-	// // printf("start - %d end- %d\n", stacks->a_start, stacks->a_end);
-
-	// // free(new_arr);
-
-	return(stacks);
 }
+
 void free_split(char **split_argv)
 {
 	int i;
