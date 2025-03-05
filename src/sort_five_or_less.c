@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 09:19:53 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/03/04 13:27:25 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/03/05 10:22:55 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,32 +60,24 @@ void	sort_three(t_stack *list, int capacity)
 {
 	int min;
 	int max;
+
 	if (is_sorted(list, capacity))
 		return ;
 	min = find_min_a(list, capacity);
 	max = find_max_a(list, capacity);
-	if (min == list->stack_a[(list->a_start + 1) % capacity])
+	if (min == list->stack_a[(list->a_start + 1) % capacity] ||
+		min == list->stack_a[(list->a_start) % capacity])
 	{
-		if (max == list->stack_a[list->a_start])
-			rotate_a(list, capacity);
-		else
+		if (list->stack_a[list->a_start] != max)
 			swap_a(list, capacity);
 	}
-	else if (min == list->stack_a[list->a_end])
-	{
-		if (max == list->stack_a[(list->a_start + 1) % capacity])
-			rrotate_a(list, capacity);
-		else
-		{
+	else if (min == list->stack_a[list->a_end] &&
+		max == list->stack_a[list->a_start])
 			swap_a(list, capacity);
-			rrotate_a(list, capacity);
-		}
-	}
-	else
-	{
-		swap_a(list, capacity);
+	if (max == list->stack_a[list->a_start])
 		rotate_a(list, capacity);
-	}
+	else if (max == list->stack_a[(list->a_start + 1) % capacity])
+		rrotate_a(list, capacity);
 }
 
 
