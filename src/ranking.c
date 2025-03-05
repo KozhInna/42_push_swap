@@ -6,11 +6,11 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 10:07:13 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/03/03 15:01:38 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/03/05 14:16:09 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"push_swap.h"
+#include "push_swap.h"
 
 void	rank_numbers(t_stack *list, int length)
 {
@@ -22,7 +22,7 @@ void	rank_numbers(t_stack *list, int length)
 
 	i = 0;
 	ranked_arr = malloc(sizeof(int) * length);
-	if(!ranked_arr)
+	if (!ranked_arr)
 		return ;
 	while (i < length)
 	{
@@ -37,6 +37,7 @@ void	rank_numbers(t_stack *list, int length)
 	free(list->stack_a);
 	list->stack_a = ranked_arr;
 }
+
 int	find_max_a(t_stack *list, int capacity)
 {
 	int	max;
@@ -55,11 +56,12 @@ int	find_max_a(t_stack *list, int capacity)
 	}
 	return (max);
 }
+
 int	find_min_a(t_stack *list, int capacity)
 {
 	int	min;
 	int	i;
-	int start;
+	int	start;
 
 	i = 0;
 	start = list->a_start;
@@ -73,11 +75,12 @@ int	find_min_a(t_stack *list, int capacity)
 	}
 	return (min);
 }
-int find_max_b(t_stack *list, int capacity)
+
+int	find_max_b(t_stack *list, int capacity)
 {
 	int	max;
 	int	i;
-	int start;
+	int	start;
 
 	i = 0;
 	start = list->b_start;
@@ -90,4 +93,23 @@ int find_max_b(t_stack *list, int capacity)
 		i++;
 	}
 	return (max);
+}
+
+int	is_sorted(t_stack *list, int capacity)
+{
+	int	i;
+	int	index;
+	int	next_index;
+
+	i = 0;
+	index = list->a_start;
+	while (i < list->length_a - 1)
+	{
+		next_index = (index + 1) % capacity;
+		if (list->stack_a[index] > list->stack_a[next_index])
+			return (0);
+		index = next_index;
+		i++;
+	}
+	return (1);
 }

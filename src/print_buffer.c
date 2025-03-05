@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-void print_circular_buffer_a(t_stack *stack, int capacity)
+void	print_circular_buffer_a(t_stack *stack, int capacity)
 {
 	int	k;
 
@@ -8,7 +8,6 @@ void print_circular_buffer_a(t_stack *stack, int capacity)
 		return ;
 	k = stack->a_start;
 	// printf("start_a - %d end_a - %d\n", stack->a_start, stack->a_end);
-
 	if (stack->a_start <= stack->a_end)
 	{
 		while (k <= stack->a_end)
@@ -25,7 +24,7 @@ void print_circular_buffer_a(t_stack *stack, int capacity)
 	printf("\n");
 }
 
-void print_circular_buffer_b(t_stack *stack, int capacity)
+void	print_circular_buffer_b(t_stack *stack, int capacity)
 {
 	int	k;
 
@@ -33,7 +32,6 @@ void print_circular_buffer_b(t_stack *stack, int capacity)
 		return ;
 	k = stack->b_start;
 	// printf("start_b - %d end_b - %d\n", k, stack->b_end);
-
 	if (stack->b_start <= stack->b_end)
 	{
 		while (k <= stack->b_end)

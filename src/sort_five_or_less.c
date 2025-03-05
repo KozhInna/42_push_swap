@@ -6,11 +6,11 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 09:19:53 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/03/05 12:35:19 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/03/05 14:17:03 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"push_swap.h"
+#include "push_swap.h"
 
 void	sort_five_or_less(t_stack *list, int capacity)
 {
@@ -33,17 +33,18 @@ void	sort_five(t_stack *list, int capacity)
 		len_b--;
 	}
 }
+
 void	push_nearest_min_to_b(t_stack *list, int capacity)
 {
-	int i;
-	int min;
+	int	i;
+	int	min;
 
 	while (list->length_a > 3)
 	{
 		i = 0;
 		min = find_min_a(list, capacity);
-		while (list->stack_a[(list->a_start + i) % capacity] != min &&
-			list->stack_a[(list->a_end - i + capacity) % capacity] != min)
+		while (list->stack_a[(list->a_start + i) % capacity] != min
+			&& list->stack_a[(list->a_end - i + capacity) % capacity] != min)
 			i++;
 		if (list->stack_a[(list->a_start + i) % capacity] == min)
 		{
@@ -61,25 +62,24 @@ void	push_nearest_min_to_b(t_stack *list, int capacity)
 
 void	sort_three(t_stack *list, int capacity)
 {
-	int min;
-	int max;
+	int	min;
+	int	max;
 
 	if (is_sorted(list, capacity))
 		return ;
 	min = find_min_a(list, capacity);
 	max = find_max_a(list, capacity);
-	if (min == list->stack_a[(list->a_start + 1) % capacity] ||
-		min == list->stack_a[(list->a_start) % capacity])
+	if (min == list->stack_a[(list->a_start + 1) % capacity]
+		|| min == list->stack_a[(list->a_start) % capacity])
 	{
 		if (list->stack_a[list->a_start] != max)
 			swap_a(list, capacity);
 	}
-	else if (min == list->stack_a[list->a_end] &&
-		max == list->stack_a[list->a_start])
-			swap_a(list, capacity);
+	else if (min == list->stack_a[list->a_end]
+		&& max == list->stack_a[list->a_start])
+		swap_a(list, capacity);
 	if (max == list->stack_a[list->a_start])
 		rotate_a(list, capacity);
 	else if (max == list->stack_a[(list->a_start + 1) % capacity])
 		rrotate_a(list, capacity);
 }
-

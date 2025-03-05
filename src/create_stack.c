@@ -6,15 +6,15 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 13:39:53 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/03/04 13:29:36 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/03/05 14:13:36 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"push_swap.h"
+#include "push_swap.h"
 
-t_stack *input_to_ar(int argc, char **argv)
+t_stack	*input_to_ar(int argc, char **argv)
 {
-	int numbers_count;
+	int		numbers_count;
 	t_stack	*stacks;
 
 	numbers_count = 0;
@@ -24,18 +24,18 @@ t_stack *input_to_ar(int argc, char **argv)
 	if (!stacks || !stacks->stack_a || !stacks->stack_b)
 	{
 		free_struct(stacks);
-		return NULL;
+		return (NULL);
 	}
 	fill_stack_a(argc, argv, stacks);
 	rank_numbers(stacks, numbers_count);
-	return(stacks);
+	return (stacks);
 }
 
-void calculate_numbers(int argc, char **argv, int *numbers_count)
+void	calculate_numbers(int argc, char **argv, int *numbers_count)
 {
-	int i;
-	int j;
-	char **split_argv;
+	int		i;
+	int		j;
+	char	**split_argv;
 
 	if (argc < 2)
 		return ;
@@ -45,7 +45,7 @@ void calculate_numbers(int argc, char **argv, int *numbers_count)
 		is_empty_str(argv[i]);
 		split_argv = ft_split(argv[i], ' ');
 		j = 0;
-		while(split_argv[j])
+		while (split_argv[j])
 		{
 			only_digits(split_argv[j]);
 			atoi_limits_check(split_argv[j]);
@@ -59,17 +59,17 @@ void calculate_numbers(int argc, char **argv, int *numbers_count)
 
 void	fill_stack_a(int argc, char **argv, t_stack *stacks)
 {
-	int i;
-	int j;
-	int int_value;
-	char **split_argv;
-	
+	int		i;
+	int		j;
+	int		int_value;
+	char	**split_argv;
+
 	i = 1;
 	while (i < argc)
 	{
 		split_argv = ft_split(argv[i], ' ');
 		j = 0;
-		while(split_argv[j])
+		while (split_argv[j])
 		{
 			int_value = atoi_limits_check(split_argv[j]);
 			duplicate_check(stacks->stack_a, stacks->a_end, int_value);
@@ -84,9 +84,9 @@ void	fill_stack_a(int argc, char **argv, t_stack *stacks)
 	}
 }
 
-void free_split(char **split_argv)
+void	free_split(char **split_argv)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (split_argv[i])

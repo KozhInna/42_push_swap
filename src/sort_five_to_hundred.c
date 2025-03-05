@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 12:32:08 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/03/05 12:32:44 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/03/05 14:17:11 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	sort_hundred(t_stack *list, int capacity)
 	int	point;
 	int	len_a;
 	int	max;
-	int min;
+	int	min;
 
 	while (list->length_a > 3)
 	{
@@ -37,17 +37,18 @@ void	sort_hundred(t_stack *list, int capacity)
 	sort_three(list, capacity);
 	push_nearest_max_to_a(list, capacity);
 }
+
 void	push_nearest_max_to_a(t_stack *list, int capacity)
 {
-	int i;
-	int max;
+	int	i;
+	int	max;
 
 	while (list->length_b > 0)
 	{
 		i = 0;
 		max = find_max_b(list, capacity);
-		while (list->stack_b[(list->b_start + i) % capacity] != max &&
-			list->stack_b[(list->b_end - i + capacity) % capacity] != max)
+		while (list->stack_b[(list->b_start + i) % capacity] != max
+			&& list->stack_b[(list->b_end - i + capacity) % capacity] != max)
 			i++;
 		if (list->stack_b[(list->b_start + i) % capacity] == max)
 		{

@@ -6,20 +6,21 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 09:54:34 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/03/04 10:10:27 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/03/05 14:16:37 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"push_swap.h"
+#include "push_swap.h"
 
 void	swap_b(t_stack *list, int capacity)
 {
 	int	temp;
 
 	if (list->b_start == list->b_end)
-		return;
+		return ;
 	temp = list->stack_b[list->b_start];
-	list->stack_b[list->b_start] = list->stack_b[(list->b_start + 1) % capacity];
+	list->stack_b[list->b_start] = list->stack_b[(list->b_start + 1)
+		% capacity];
 	list->stack_b[(list->b_start + 1) % capacity] = temp;
 	write(1, "sb\n", 3);
 }
@@ -41,6 +42,7 @@ void	rrotate_b(t_stack *list, int capacity)
 	}
 	write(1, "rrb\n", 4);
 }
+
 void	rotate_b(t_stack *list, int capacity)
 {
 	if (list->b_start == list->b_end)
@@ -50,6 +52,7 @@ void	rotate_b(t_stack *list, int capacity)
 	list->b_start = (list->b_start + 1) % capacity;
 	write(1, "rb\n", 3);
 }
+
 void	push_b(t_stack *list, int capacity)
 {
 	if (list->length_b != 0)
@@ -61,4 +64,3 @@ void	push_b(t_stack *list, int capacity)
 		list->a_start = (list->a_start + 1) % capacity;
 	write(1, "pb\n", 3);
 }
-
