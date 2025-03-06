@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 10:07:13 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/03/05 14:16:09 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/03/06 15:08:26 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,23 +93,4 @@ int	find_max_b(t_stack *list, int capacity)
 		i++;
 	}
 	return (max);
-}
-
-int	is_sorted(t_stack *list, int capacity)
-{
-	int	i;
-	int	index;
-	int	next_index;
-
-	i = 0;
-	index = list->a_start;
-	while (i < list->length_a - 1)
-	{
-		next_index = (index + 1) % capacity;
-		if (list->stack_a[index] > list->stack_a[next_index])
-			return (0);
-		index = next_index;
-		i++;
-	}
-	return (1);
 }

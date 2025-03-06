@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 13:39:53 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/03/05 14:13:36 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/03/06 14:40:49 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,17 @@
 t_stack	*input_to_ar(int argc, char **argv)
 {
 	int		numbers_count;
-	t_stack	*stacks;
+	t_stack	*list;
 
 	numbers_count = 0;
-	stacks = NULL;
+	list = NULL;
 	calculate_numbers(argc, argv, &numbers_count);
-	intialise_struct(&stacks, numbers_count);
-	if (!stacks || !stacks->stack_a || !stacks->stack_b)
-	{
-		free_struct(stacks);
+	intialise_struct(&list, numbers_count);
+	if (!list)
 		return (NULL);
-	}
-	fill_stack_a(argc, argv, stacks);
-	rank_numbers(stacks, numbers_count);
-	return (stacks);
+	fill_stack_a(argc, argv, list);
+	rank_numbers(list, numbers_count);
+	return (list);
 }
 
 void	calculate_numbers(int argc, char **argv, int *numbers_count)
@@ -44,11 +41,13 @@ void	calculate_numbers(int argc, char **argv, int *numbers_count)
 	{
 		is_empty_str(argv[i]);
 		split_argv = ft_split(argv[i], ' ');
+		if (!split_argv)
+			exit(1);
 		j = 0;
 		while (split_argv[j])
 		{
-			only_digits(split_argv[j]);
-			atoi_limits_check(split_argv[j]);
+			only_digits(split_argv, split_argv[j]);
+			atoi_limits_check(split_argv, split_argv[j]);
 			(*numbers_count)++;
 			j++;
 		}
@@ -57,7 +56,7 @@ void	calculate_numbers(int argc, char **argv, int *numbers_count)
 	}
 }
 
-void	fill_stack_a(int argc, char **argv, t_stack *stacks)
+void	fill_stack_a(int argc, char **argv, t_stack *list)
 {
 	int		i;
 	int		j;
@@ -68,33 +67,22 @@ void	fill_stack_a(int argc, char **argv, t_stack *stacks)
 	while (i < argc)
 	{
 		split_argv = ft_split(argv[i], ' ');
+		if (!split_argv)
+			exit(1);
 		j = 0;
 		while (split_argv[j])
 		{
-			int_value = atoi_limits_check(split_argv[j]);
-			duplicate_check(stacks->stack_a, stacks->a_end, int_value);
-			stacks->stack_a[stacks->a_end] = int_value;
-			stacks->length_a++;
-			if (stacks->length_a != stacks->capacity)
-				stacks->a_end++;
+			int_value = atoi_limits_check(split_argv, split_argv[j]);
+			duplicate_check(split_argv, list, int_value);
+			list->stack_a[list->a_end] = int_value;
+			list->length_a++;
+			if (list->length_a != list->capacity)
+				list->a_end++;
 			j++;
 		}
 		free_split(split_argv);
 		i++;
 	}
-}
-
-void	free_split(char **split_argv)
-{
-	int	i;
-
-	i = 0;
-	while (split_argv[i])
-	{
-		free(split_argv[i]);
-		i++;
-	}
-	free(split_argv);
 }
 
 void	intialise_struct(t_stack **list, int numbers_count)

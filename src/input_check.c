@@ -6,40 +6,43 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:56:20 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/03/05 14:18:22 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/03/06 15:09:00 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	duplicate_check(int *new_arr, int arr_length, int int_value)
+void	duplicate_check(char **split_argv, t_stack *list, int int_value)
 {
 	int	i;
 
 	i = 0;
-	if (!new_arr)
+	if (!list || !list->stack_a)
 		return ;
-	while (i < arr_length)
+	while (i < list->a_end)
 	{
-		if (new_arr[i] == int_value)
-			print_error();
+		if (list->stack_a[i] == int_value)
+		{
+			free_struct(list);
+			print_error_free(split_argv);
+		}
 		i++;
 	}
 }
 
-void	only_digits(char *s)
+void	only_digits(char **split_argv, char *s)
 {
 	int	i;
 
 	i = 0;
 	if (s[i] == '-' || s[i] == '+')
 		i++;
-	if (!ft_isdigit(s[i]))
-		print_error();
+	if (!s[i] || !ft_isdigit(s[i]))
+		print_error_free(split_argv);
 	while (s[i])
 	{
 		if (!ft_isdigit(s[i]))
-			print_error();
+			print_error_free(split_argv);
 		i++;
 	}
 }
@@ -57,7 +60,7 @@ void	is_empty_str(char *s)
 	print_error();
 }
 
-int	atoi_limits_check(const char *nptr)
+int	atoi_limits_check(char **split_argv, const char *nptr)
 {
 	long	res;
 	int		sign;
@@ -77,16 +80,29 @@ int	atoi_limits_check(const char *nptr)
 	{
 		res = res * 10 + (*nptr - '0');
 		if (sign == 1 && res > INT_MAX)
-			print_error();
+			print_error_free(split_argv);
 		if (sign == -1 && - res < INT_MIN)
-			print_error();
+			print_error_free(split_argv);
 		nptr++;
 	}
 	return ((int)(res * sign));
 }
 
-void	print_error(void)
+int	is_sorted(t_stack *list, int capacity)
 {
-	ft_putstr_fd("Error\n", 2);
-	exit(1);
+	int	i;
+	int	index;
+	int	next_index;
+
+	i = 0;
+	index = list->a_start;
+	while (i < list->length_a - 1)
+	{
+		next_index = (index + 1) % capacity;
+		if (list->stack_a[index] > list->stack_a[next_index])
+			return (0);
+		index = next_index;
+		i++;
+	}
+	return (1);
 }
