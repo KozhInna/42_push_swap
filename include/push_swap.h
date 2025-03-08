@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 12:17:34 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/03/06 14:57:10 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/03/08 22:11:45 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	sort_three(t_stack *list, int capacity);
 void	sort_five_or_less(t_stack *list, int capacity);
 void	sort_five(t_stack *list, int capacity);
 void	sort_hundred(t_stack *list, int capacity);
-void	partitioning_stack_a(t_stack *list, int capacity, int p1, int p2);
+void	partition_a(t_stack *list, int capacity, int p1, int p2, int *len_a);
 void	process_stack_a(t_stack *list, int capacity, int len_a, int i);
 void	process_stack_b(t_stack *list, int capacity, int len_b, int i);
 void	push_nearest_min_to_b(t_stack *list, int capacity);

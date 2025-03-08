@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 12:32:08 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/03/05 23:06:13 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/03/08 22:11:29 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,27 @@ void	sort_hundred(t_stack *list, int capacity)
 		point2 = min + (max - min) / 2;
 		len_a = list->length_a;
 		while (len_a--)
-			partitioning_stack_a(list, capacity, point1, point2);
+			partition_a(list, capacity, point1, point2, &len_a);
 	}
 	sort_three(list, capacity);
 	push_nearest_max_to_a(list, capacity);
 }
 
-void	partitioning_stack_a(t_stack *list, int capacity, int p1, int p2)
+void	partition_a(t_stack *list, int capacity, int p1, int p2, int *len_a)
 {
 	if (list->stack_a[list->a_start] <= p1)
 	{
 		push_b(list, capacity);
 		if (list->length_b > 1)
-			rotate_b(list, capacity);
+		{
+			if (list->stack_a[list->a_start] > p2 && (*len_a) > 1)
+			{
+				rotate_both(list, capacity);
+				(*len_a)--;
+			}
+			else 
+				rotate_b(list, capacity);
+		}	
 	}
 	else if (list->stack_a[list->a_start] <= p2)
 		push_b(list, capacity);
