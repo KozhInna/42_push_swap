@@ -6,11 +6,11 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:42:54 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/03/06 15:08:40 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/03/21 12:58:53 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <push_swap.h>
+#include "push_swap.h"
 
 int	main(int argc, char **argv)
 {
